@@ -1,31 +1,60 @@
-
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const readline = require("readline-sync");
 
 function run() {
   const root = process.cwd();
   const docsDir = path.join(root, "docs");
-  const jsonPath = path.join(docsDir, "lfs.json");
+  const jsonPath = path.join(docsDir, "info.json");
   const readmePath = path.join(root, "README.md");
 
-  // Criar pasta docs
   if (!fs.existsSync(docsDir)) {
     fs.mkdirSync(docsDir);
     console.log("📂 Pasta docs criada.");
   }
 
-  // Criar/atualizar lfs.json
-  const jsonContent = {
-    status: "instalado",
-    data: new Date().toISOString()
-  };
-  fs.writeFileSync(jsonPath, JSON.stringify(jsonContent, null, 2));
-  console.log("✅ docs/lfs.json criado/atualizado.");
 
-  // Atualizar README.md
+const tile = readline.question("Qual será o título do projeto? ");
+const description = readline.question("Qual será a descrição do projeto? ");
+const status = readline.question("Qual será a status do projeto? ");
+const stacksInput = readline.question("Quais as stacks do projeto? (separe por vírgula) ");
+const stacks = stacksInput.split(",").map(s => s.trim()).filter(Boolean);
+
+  fs.writeFileSync(
+    jsonPath,
+    JSON.stringify(
+      {
+        images: ["https://picsum.photos/id/237/200/300"],
+        title: tile,
+        description: description,
+        status: status,
+        stacks: stacks,
+        links: [
+          {
+            name: "GitHub",
+            url: "",
+          },
+          {
+            name: "Live Demo",
+            url: "",
+          },
+        ],
+      },
+      null,
+      2
+    )
+  );
+  console.log("✅ docs/info.json criado.");
+
   if (fs.existsSync(readmePath)) {
-    fs.appendFileSync(readmePath, "\n\n## Nota\nProjeto inicializado com LFS INIT.\n");
+    fs.appendFileSync(
+      readmePath,
+      "\n\n## Nota\nProjeto inicializado com Paterni Init.\n"
+    );
     console.log("📝 README.md atualizado.");
   } else {
-    fs.writeFileSync(readmePath, "# Projeto\n\nCriado com LFS INIT.\n");
+    fs.writeFileSync(readmePath, "# Projeto\n\nCriado com Paterni Init.\n");
     console.log("📝 README.md criado.");
   }
 }
