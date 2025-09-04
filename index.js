@@ -13,9 +13,12 @@ function run() {
     fs.mkdirSync(docsDir);
     console.log("📂 Pasta docs criada.");
   }
+if (fs.existsSync(jsonPath)) {
+  console.log("⚠️ docs/info.json já existe. Não sobrescrevendo.");
+  return;
+}
 
-
-const tile = readline.question("Qual será o título do projeto? ");
+const title = readline.question("Qual será o título do projeto? ");
 const description = readline.question("Qual será a descrição do projeto? ");
 const status = readline.question("Qual será a status do projeto? ");
 const stacksInput = readline.question("Quais as stacks do projeto? (separe por vírgula) ");
@@ -26,7 +29,7 @@ const stacks = stacksInput.split(",").map(s => s.trim()).filter(Boolean);
     JSON.stringify(
       {
         images: ["https://picsum.photos/id/237/200/300"],
-        title: tile,
+        title: title,
         description: description,
         status: status,
         stacks: stacks,

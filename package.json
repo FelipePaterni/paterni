@@ -3,5 +3,9 @@
   "version": "1.0.1",
   "bin": {
     "create-paterni": "index.js"
-  }
+  },
+  "dependencies": {
+  "readline-sync": "^1.4.10"
+}
+
 }
