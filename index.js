@@ -18,10 +18,10 @@ if (fs.existsSync(jsonPath)) {
   return;
 }
 
-const title = readline.question("Qual será o título do projeto? ");
-const description = readline.question("Qual será a descrição do projeto? ");
-const status = readline.question("Qual será a status do projeto? ");
-const stacksInput = readline.question("Quais as stacks do projeto? (separe por vírgula) ");
+const title = readline.question("Qual será o título do projeto? ", { encoding: "utf8" });
+const description = readline.question("Qual será a descrição do projeto? ",{ encoding: "utf8" });
+const status = readline.question("Qual será a status do projeto? ",{ encoding: "utf8" });
+const stacksInput = readline.question("Quais as stacks do projeto? (separe por vírgula) ",{ encoding: "utf8" });
 const stacks = stacksInput.split(",").map(s => s.trim()).filter(Boolean);
 
   fs.writeFileSync(
