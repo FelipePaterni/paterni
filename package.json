@@ -1,11 +1,10 @@
 {
   "name": "create-paterni",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "bin": {
     "create-paterni": "index.js"
   },
   "dependencies": {
-  "readline-sync": "^1.4.10"
-}
-
+    "readline-sync": "^1.4.10"
+  }
 }
